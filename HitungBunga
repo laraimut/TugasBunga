@@ -1,0 +1,66 @@
+import java.util.Scanner;
+import java.util.Calendar;
+public class Main
+ {    
+     public static void main ( String[] args ){
+
+       Scanner sc = new Scanner ( System.in);
+       
+       System.out.println (" Masukan jumlah pinjaman : Rp ");
+       double pinjaman = sc.nextDouble();
+       
+       System.out.println (" Masukan Tenor  : .... bulan");
+       int tenor= sc.nextInt();
+       
+       System.out.println (" Masukan suku bunga : ..... %");
+       double bunga = sc.nextDouble(); 
+       
+       System.out.println (" Bunga Administrasi Bulanan : Rp  ");
+       double adm = sc.nextDouble();
+       
+       double angsuranpokok = pinjaman / tenor;
+       Calendar cal = Calendar.getInstance();
+       int month = cal.get(Calendar.MONTH) + 1;
+       
+       int selesai =  cal.get(Calendar.MONTH) + 1 + tenor;
+       
+       double bungabulan = 0;
+       
+       double sisapinjaman = pinjaman;
+       double tb = 0;
+       double totalangusran = 0;
+       
+       System.out.println (" Periode cicilan anda dari bulan ke- :   " + month + "sampai  " + selesai);
+       System.out.printf (" Angsuran Pokok anda Rp %.2f :   " , angsuranpokok );
+       for ( int i = 1; i<= tenor ; i++){
+            System.out.println ("-------------------------------------------------------------");
+            System.out.println ("Angsuran Bunga Bulan ke  -  " + i);
+            bungabulan = (pinjaman - (( i-1 ) * angsuranpokok)) * (bunga/100) / 12;
+            tb += bungabulan;
+            System.out.printf ("Angsuran Pokok Rp %.2f  " , angsuranpokok);
+            System.out.println ();
+            System.out.printf ("Biaya Admin Rp %.2f " , adm);
+            System.out.println ();
+            totalangusran += bungabulan+angsuranpokok + adm;
+            System.out.printf ("Total Angusran Bulan ke - " + i );
+            System.out.printf("Rp %.2f",bungabulan+angsuranpokok + adm);
+            System.out.println ();
+            sisapinjaman -= angsuranpokok;
+            System.out.printf ("Sisa Pinjaman Rp %.2f   " ,  sisapinjaman);
+            System.out.println ();
+        }
+       System.out.println ("-------------------------------------------------------------");
+       System.out.printf ("Total Biaya Admin Rp %.2f  " , adm*tenor);
+       System.out.println ();
+       System.out.printf ("Total Angsuran Pokok Rp %.2f  " , angsuranpokok* tenor);
+       System.out.println ();
+       System.out.printf ("Total Bunga Rp %.2f" , tb);
+       System.out.println ();
+       System.out.printf ("Total Angsuran Rp   %.2f" , totalangusran);
+       
+       
+       
+       
+       
+  }
+}
